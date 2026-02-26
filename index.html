@@ -87,7 +87,6 @@
             margin: -10px -20px -20px -10px; 
         }
 
-        /* TAMANHOS REDUZIDOS: Agora o clamp vai de 3rem até 8rem (mais pequeno e seguro) */
         .hero-title { 
             font-family: var(--font-heading); 
             font-size: clamp(3rem, 8vw, 8rem); 
@@ -113,7 +112,6 @@
         .slice-item:hover { flex: 5; } 
         .archive-unfold:hover { margin-left: 50px; border-left: 1px solid var(--accent-gold); }
         
-        /* Fitas amarelas */
         .featured-main::after { content: "MAIN"; position: absolute; top: 25px; right: -35px; background: var(--accent-gold); color: #000; padding: 5px 40px; font-size: 10px; font-weight: 900; transform: rotate(45deg); z-index: 10; letter-spacing: 1px; }
         .featured-dev::after { content: "IN DEVELOPMENT"; position: absolute; top: 30px; right: -50px; background: var(--accent-gold); color: #000; padding: 5px 45px; font-size: 8px; font-weight: 900; transform: rotate(45deg); z-index: 10; letter-spacing: 1px; width: max-content; }
 
@@ -159,7 +157,6 @@
 
         .contact-section { padding: 150px 0 100px 0; background: var(--bg-contact); border-radius: 24px; margin-bottom: 20px; text-align: center; display:flex; flex-direction:column; align-items:center; }
         
-        /* TAMANHOS REDUZIDOS: Agora o clamp vai de 2rem até 4.5rem (mais pequeno e seguro) */
         .contact-phrase { 
             font-family: var(--font-heading); 
             font-size: clamp(2rem, 5vw, 4.5rem); 
@@ -171,7 +168,6 @@
             transform: translateY(120%); 
         }
 
-        /* Classe especial para forçar a quebra da linha só no Mobile */
         .mobile-br { display: none; }
 
         .email-big { font-family: var(--font-main); font-size: clamp(1rem, 2vw, 1.5rem); text-transform: uppercase; font-weight: 600; letter-spacing: 2px; color: var(--gray); text-decoration: none; transition: 0.3s; cursor: pointer; border: 1px solid var(--border); padding: 20px 40px; border-radius: 50px; }
@@ -253,16 +249,14 @@
             .nav-link { font-size: 9px; }
             .theme-btn { padding: 5px 10px; font-size: 8px; }
             
-            /* TÍTULOS REDUZIDOS NO MOBILE PARA NÃO CORTAR */
-            .hero-title { font-size: 10vw !important; letter-spacing: -1px; } 
+            .hero-title { font-size: 9vw !important; letter-spacing: -1px; } 
             
             .contact-phrase { 
-                font-size: 11vw !important; 
-                white-space: normal !important; /* Permite quebrar onde colocámos a tag <br> */
+                font-size: 10vw !important; 
+                white-space: normal !important;
                 letter-spacing: -1px; 
             }
 
-            /* Ativamos a quebra de linha manual SÓ no telemóvel */
             .mobile-br { display: block; }
             
             .projects-section-title, .about-section, .contact-section { padding: 80px 5vw 40px 5vw; }
@@ -498,7 +492,7 @@
         </section>
 
         <footer class="framed-section">
-            <div class="footer-col"><span style="color:var(--text); font-weight:700;">RODRIGO SANTOS</span><span>Game Designer & Producer</span></div>
+            <div class="footer-col"><span style="color:var(--text); font-weight:700;">RODRIGO SANTOS</span><span>Game Designer, Sound Designer & QA</span></div>
             <div class="footer-col time-loc"><span>Porto, Portugal</span><span id="time-display">00:00 WET</span><span>&copy; 2026</span></div>
         </footer>
     </main>
