@@ -64,23 +64,42 @@
 
         .framed-section { width: 96vw; margin: 0 auto; background: var(--bg-projects); border: 1px solid var(--border); overflow: hidden; }
 
-        nav { position: fixed; top: 20px; left: 2vw; width: 96vw; padding: 25px 5vw; z-index: 9999; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); border-radius: 24px; background: var(--nav-bg); display: flex; justify-content: space-between; align-items: center; transform: translateY(-150%); border: 1px solid var(--border); }
+        nav { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 5vw; z-index: 9999; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); background: var(--nav-bg); display: flex; justify-content: space-between; align-items: center; transform: translateY(-150%); transition: background 0.4s ease; }
         .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
         .nav-right { display: flex; gap: 40px; align-items: center; }
-        .nav-item { position: relative; padding: 10px 0; }
         .nav-link { text-decoration: none; color: var(--text); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; position: relative; }
         .nav-link::after { content:''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px; background: var(--text); transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         .nav-link:hover::after { width: 100%; }
         .theme-btn { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 8px 18px; border-radius: 30px; font-size: 9px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .theme-btn:hover { background: var(--text); color: var(--bg-body); border-color: var(--text); }
 
-        .hero { height: calc(100vh - 40px); margin-top: 20px; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; position: relative; color: #ffffff; }
+        .hero { height: calc(100vh - 40px); margin-top: 20px; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; position: relative; color: #ffffff; overflow: hidden; }
         #hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .slide-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; visibility: hidden; transition: opacity 1.5s ease-in-out, visibility 1.5s; transform: scale(1.05); }
         .slide-img.active { opacity: 0.5; visibility: visible; } 
         .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%); z-index: 1; }
         .hero-content { position: relative; z-index: 2; text-shadow: 0 10px 30px rgba(0,0,0,0.5); padding: 0 5vw; }
-        .hero-title { font-family: var(--font-heading); font-size: clamp(4rem, 10vw, 9rem); line-height: 0.9; text-transform: uppercase; font-weight: 900; letter-spacing: -0.03em; transform: translateY(120%); color: #ffffff; }
+        
+        .hero-text-mask, .title-mask { 
+            overflow: hidden; 
+            display: block; 
+            padding: 10px 20px 20px 10px; 
+            margin: -10px -20px -20px -10px; 
+        }
+
+        /* TAMANHOS REDUZIDOS: Agora o clamp vai de 3rem até 8rem (mais pequeno e seguro) */
+        .hero-title { 
+            font-family: var(--font-heading); 
+            font-size: clamp(3rem, 8vw, 8rem); 
+            line-height: 1.1; 
+            text-transform: uppercase; 
+            font-weight: 900; 
+            letter-spacing: -0.03em; 
+            transform: translateY(120%); 
+            color: #ffffff; 
+            white-space: nowrap; 
+        }
+        
         .identity-wrap { margin-top: 35px; font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 600; border-top: 2px solid rgba(255,255,255,0.3); padding-top: 20px; color: #cccccc; display: inline-block; min-height: 60px; opacity: 0; }
         #typewriter { color: #ffffff; font-weight: 700; }
         .cursor-bar { border-right: 3px solid #ffffff; animation: blink 0.8s infinite; margin-left: 5px; }
@@ -93,7 +112,10 @@
         .slice-item:last-child { border-right: none; }
         .slice-item:hover { flex: 5; } 
         .archive-unfold:hover { margin-left: 50px; border-left: 1px solid var(--accent-gold); }
+        
+        /* Fitas amarelas */
         .featured-main::after { content: "MAIN"; position: absolute; top: 25px; right: -35px; background: var(--accent-gold); color: #000; padding: 5px 40px; font-size: 10px; font-weight: 900; transform: rotate(45deg); z-index: 10; letter-spacing: 1px; }
+        .featured-dev::after { content: "IN DEVELOPMENT"; position: absolute; top: 30px; right: -50px; background: var(--accent-gold); color: #000; padding: 5px 45px; font-size: 8px; font-weight: 900; transform: rotate(45deg); z-index: 10; letter-spacing: 1px; width: max-content; }
 
         .slice-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.3); transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1); transform: scale(1.1); }
         .slice-item:hover .slice-bg { filter: grayscale(0%) brightness(0.7); transform: scale(1); }
@@ -123,6 +145,8 @@
         .sub-mini-slice:hover .sub-mini-spine { opacity: 0; }
         .sub-mini-content { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; background: linear-gradient(to top, #000, transparent); opacity: 0; transform: translateY(20px); transition: 0.4s; z-index: 6; }
         .sub-mini-slice:hover .sub-mini-content { opacity: 1; transform: translateY(0); }
+        .sub-mini-content span { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #aaa; font-weight: 700; margin-bottom: 8px; display: block; }
+        .sub-mini-content h4 { font-family: var(--font-heading); font-size: 1.2rem; margin: 0; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
 
         .about-section { padding: 150px 0; background: var(--bg-about); border-radius: 24px; margin-bottom: 20px; position: relative; z-index: 3; }
         .about-container { display: flex; align-items: flex-start; gap: 80px; position: relative; }
@@ -134,8 +158,22 @@
         .btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.1); }
 
         .contact-section { padding: 150px 0 100px 0; background: var(--bg-contact); border-radius: 24px; margin-bottom: 20px; text-align: center; display:flex; flex-direction:column; align-items:center; }
-        .contact-phrase { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 5rem); font-weight: 800; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 60px; max-width: 900px; line-height: 1; transform: translateY(120%); white-space: nowrap; }
-        .title-mask { overflow: hidden; }
+        
+        /* TAMANHOS REDUZIDOS: Agora o clamp vai de 2rem até 4.5rem (mais pequeno e seguro) */
+        .contact-phrase { 
+            font-family: var(--font-heading); 
+            font-size: clamp(2rem, 5vw, 4.5rem); 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            letter-spacing: -2px; 
+            white-space: nowrap; 
+            line-height: 1.1; 
+            transform: translateY(120%); 
+        }
+
+        /* Classe especial para forçar a quebra da linha só no Mobile */
+        .mobile-br { display: none; }
+
         .email-big { font-family: var(--font-main); font-size: clamp(1rem, 2vw, 1.5rem); text-transform: uppercase; font-weight: 600; letter-spacing: 2px; color: var(--gray); text-decoration: none; transition: 0.3s; cursor: pointer; border: 1px solid var(--border); padding: 20px 40px; border-radius: 50px; }
         .email-big:hover { color: var(--text); border-color: var(--text); background: rgba(255,255,255,0.05); }
         #copy-feedback { font-size: 10px; color: var(--text); margin-top: 15px; opacity: 0; transition: 0.3s; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
@@ -180,20 +218,6 @@
         .cs-grid-alt h3 { font-family: var(--font-heading); font-size: 2rem; text-transform: uppercase; color: var(--text); margin-bottom: 20px; }
         .cs-grid-alt p { font-size: 1.1rem; line-height: 1.8; color: var(--gray); text-align: justify; }
 
-        .archive-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; margin-top: 40px; }
-        .archive-card { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; position: relative; overflow: hidden; transition: 0.4s; opacity: 0; transform: translateY(50px); }
-        .archive-card:hover { border-color: var(--accent-gold); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .archive-card.featured-arch { grid-column: span 6; } 
-        .archive-card.medium-arch { grid-column: span 3; }
-        .archive-card.small-arch { grid-column: span 2; }
-        .archive-card video, .archive-card .img-stack { width: 100%; border-radius: 6px; margin-bottom: 20px; background: #000; display: block; }
-        .archive-card h3 { font-family: var(--font-heading); font-size: 1.2rem; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 8px; }
-        .archive-card span { font-size: 10px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
-        .archive-card p { font-size: 0.9rem; line-height: 1.6; color: #bbb; margin-top: 10px; }
-
-        .design-collage { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
-        .design-collage img { width: 100%; border-radius: 8px; border: 1px solid var(--border); }
-
         .story-panel { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; margin-top: 20px; }
         .story-col h5 { font-family: var(--font-heading); font-size: 11px; text-transform: uppercase; color: var(--text); margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 10px; letter-spacing: 2px; }
         .bio-text { font-size: 1.1rem; line-height: 1.8; color: var(--gray); margin-bottom: 20px; text-align: justify; }
@@ -211,17 +235,72 @@
         #btn-enter { display: none; background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 10px 25px; margin-top: 30px; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 2px; font-size: 10px; cursor: pointer; border-radius: 30px; transition: 0.3s; }
         #btn-enter:hover { background: #fff; color: #000; }
 
+        /* --- RESPONSIVIDADE (MOBILE & TABLETS) --- */
         @media (max-width: 1100px) {
-            .slice-section { flex-direction: column; height: 120vh; }
+            .slice-section { flex-direction: column; height: auto; }
             .slice-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
             .slice-spine { flex-direction: row; gap: 20px; }
             .slice-spine h4 { writing-mode: horizontal-tb; transform: none; font-size: 1.5rem; }
             .story-panel { grid-template-columns: 1fr; }
-            .about-container { flex-direction: column; }
+            .about-container { flex-direction: column; gap: 40px; }
             .about-media-wrap { width: 100%; }
-            .archive-grid { grid-template-columns: 1fr; }
-            .archive-card.featured-arch, .archive-card.medium-arch, .archive-card.small-arch { grid-column: span 1; }
             .cs-grid-alt, .cs-grid-alt.reverse { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 15px; padding: 15px 5vw; border-radius: 0; }
+            .nav-right { width: 100%; justify-content: space-between; gap: 10px; }
+            .nav-link { font-size: 9px; }
+            .theme-btn { padding: 5px 10px; font-size: 8px; }
+            
+            /* TÍTULOS REDUZIDOS NO MOBILE PARA NÃO CORTAR */
+            .hero-title { font-size: 10vw !important; letter-spacing: -1px; } 
+            
+            .contact-phrase { 
+                font-size: 11vw !important; 
+                white-space: normal !important; /* Permite quebrar onde colocámos a tag <br> */
+                letter-spacing: -1px; 
+            }
+
+            /* Ativamos a quebra de linha manual SÓ no telemóvel */
+            .mobile-br { display: block; }
+            
+            .projects-section-title, .about-section, .contact-section { padding: 80px 5vw 40px 5vw; }
+            .email-big { font-size: 0.8rem; padding: 15px 20px; word-break: break-all; }
+            
+            .overlay-header-content { padding: 30px 5vw; }
+            #overlay-title { font-size: 2.2rem; }
+            .close-overlay { top: 20px; right: 20px; font-size: 10px; padding: 8px 15px; }
+            #overlay-content-wrap { padding: 40px 4vw 80px 4vw; }
+            .cs-grid-alt h3 { font-size: 1.5rem; }
+            
+            .slice-section { height: auto; display: flex; flex-direction: column; border-radius: 0; }
+            .slice-item { flex: none !important; height: 140px; min-height: unset; border-bottom: 1px solid rgba(255,255,255,0.15); }
+            .slice-item.archive-unfold { height: auto; min-height: unset; display: flex; flex-direction: column; margin-left: 0 !important; }
+            .archive-unfold:hover { margin-left: 0 !important; border-left: none !important; }
+            
+            .slice-spine { display: none !important; } 
+            .slice-content { height: 100%; opacity: 1 !important; transform: none !important; pointer-events: auto !important; padding: 20px; justify-content: center; align-items: center; text-align: center; background: rgba(0,0,0,0.5); }
+            .slice-content-inner { min-width: unset; width: 100%; }
+            .slice-content h2 { font-size: 1.8rem; margin-bottom: 0; }
+            .slice-btn { display: none; } 
+            
+            .nested-accordion { position: relative; flex-direction: column; height: auto; opacity: 1; pointer-events: auto; display: block; }
+            .sub-mini-slice { flex: none !important; height: 120px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .sub-mini-spine { display: none !important; }
+            .sub-mini-content { height: 100%; opacity: 1 !important; transform: none !important; background: rgba(0,0,0,0.5); padding: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+            .sub-mini-content h4 { font-size: 1.4rem; }
+
+            .featured-main::after, .featured-dev::after { top: 20px; right: -45px; font-size: 8px; }
+
+            footer { flex-direction: column; text-align: center; align-items: center; gap: 20px; }
+            .time-loc { text-align: center; }
+        }
+
+        /* Desativar o custom cursor em dispositivos mobile (Touch) */
+        @media (hover: none) and (pointer: coarse) {
+            #cursor, #cursor-follower { display: none !important; }
+            * { cursor: auto !important; }
         }
 
         #static-noise {
@@ -241,7 +320,7 @@
     <div id="project-overlay">
         <div id="overlay-bg"></div>
         <div id="overlay-inner">
-            <div class="close-overlay sfx-click" onclick="closeOverlay()">CLOSE_SYSTEM</div>
+            <div class="close-overlay sfx-click" onclick="closeOverlay()">CLOSE</div>
             <div class="overlay-hero" id="o-hero">
                 <img id="overlay-hero-img" src="" alt="Overlay Hero">
                 <div class="overlay-header-content">
@@ -264,9 +343,7 @@
         <a href="#" class="logo sfx-hover sfx-click">R. SANTOS</a>
         <div class="nav-right">
             <a href="#" class="nav-link sfx-click" id="audio-toggle">AUDIO: ON</a>
-            <div class="nav-item">
-                <a href="#projects" class="nav-link sfx-hover">Projects</a>
-            </div>
+            <a href="#projects" class="nav-link sfx-hover">Projects</a>
             <a href="#about" class="nav-link sfx-hover">About</a>
             <a href="#contact" class="nav-link sfx-hover">Contact</a>
             <button class="theme-btn sfx-click" id="theme-btn">LIGHT MODE</button>
@@ -292,19 +369,19 @@
         </section>
 
         <div class="projects-section-title framed-section" id="projects">
-            <div class="title-mask" style="display: inline-block;">
-                <h2 class="contact-phrase anim-title" style="font-size: 3rem; margin-bottom: 0; letter-spacing: -1px;">Projects</h2>
+            <div class="title-mask">
+                <h2 class="contact-phrase anim-title" style="margin-bottom: 0;">Projects</h2>
             </div>
         </div>
 
         <section class="slice-section reveal-scroll framed-section">
             
-            <div class="slice-item featured-main sfx-hover" onclick="openProject('Disasterpiece', this)">
+            <div class="slice-item featured-dev sfx-hover" onclick="openProject('Disasterpiece', this)">
                 <img src="img/disasterpiece1.png" class="slice-bg">
                 <div class="slice-spine"><span>01</span><h4>Disasterpiece</h4></div>
                 <div class="slice-content">
                     <div class="slice-content-inner">
-                        <span>01 / Management</span><h2>Disasterpiece</h2>
+                        <span>3D Physics based Co-op Game</span><h2>Disasterpiece</h2>
                         <div class="slice-btn sfx-hover">Explore Case Study</div>
                     </div>
                 </div>
@@ -315,7 +392,7 @@
                 <div class="slice-spine"><span>02</span><h4>Huddle</h4></div>
                 <div class="slice-content">
                     <div class="slice-content-inner">
-                        <span>02 / QA Lead</span><h2>Huddle</h2>
+                        <span>3D Underwater Arcade Survival Game</span><h2>Huddle</h2>
                         <div class="slice-btn sfx-hover">Explore Case Study</div>
                     </div>
                 </div>
@@ -326,7 +403,7 @@
                 <div class="slice-spine"><span>03</span><h4>Intempo</h4></div>
                 <div class="slice-content">
                     <div class="slice-content-inner">
-                        <span>03 / Design</span><h2>Intempo</h2>
+                        <span>2D Rhythm Platformer Game</span><h2>Intempo</h2>
                         <div class="slice-btn sfx-hover">Explore Case Study</div>
                     </div>
                 </div>
@@ -337,7 +414,7 @@
                 <div class="slice-spine"><span>04</span><h4>Hurrya</h4></div>
                 <div class="slice-content">
                     <div class="slice-content-inner">
-                        <span>04 / Design</span><h2>Hurrya</h2>
+                        <span>2D Top-Down Survival Game</span><h2>Hurrya</h2>
                         <div class="slice-btn sfx-hover">Explore Case Study</div>
                     </div>
                 </div>
@@ -348,7 +425,7 @@
                 <div class="slice-spine"><span>05</span><h4>EarForceOne</h4></div>
                 <div class="slice-content">
                     <div class="slice-content-inner">
-                        <span>05 / Sound Design</span><h2>EarForceOne</h2>
+                        <span>News Game</span><h2>EarForceOne</h2>
                         <div class="slice-btn sfx-hover">Explore Case Study</div>
                     </div>
                 </div>
@@ -361,23 +438,23 @@
                 <div class="nested-accordion">
                     <div class="sub-mini-slice sfx-click" onclick="openProject('Digital Arts', this)">
                         <img src="img/arduino1.jpeg" class="sub-mini-bg">
-                        <div class="sub-mini-spine"><h5>Digital Arts</h5></div>
-                        <div class="sub-mini-content"><h4>Arduino Car</h4></div>
+                        <div class="sub-mini-spine"><h5>Arduino Car</h5></div>
+                        <div class="sub-mini-content"><span>Digital Arts</span><h4>Arduino Car</h4></div>
                     </div>
                     <div class="sub-mini-slice sfx-click" onclick="openProject('AV360 Horror', this)">
                         <img src="img/av3601.png" class="sub-mini-bg">
                         <div class="sub-mini-spine"><h5>AV360 Horror</h5></div>
-                        <div class="sub-mini-content"><h4>Interactive</h4></div>
+                        <div class="sub-mini-content"><span>Interactive</span><h4>AV360 Horror</h4></div>
                     </div>
                     <div class="sub-mini-slice sfx-click" onclick="openProject('Sound Alike', this)">
                         <img src="img/unravel1.png" class="sub-mini-bg">
-                        <div class="sub-mini-spine"><h5>Sound Alike</h5></div>
-                        <div class="sub-mini-content"><h4>Unravel</h4></div>
+                        <div class="sub-mini-spine"><h5>Unravel</h5></div>
+                        <div class="sub-mini-content"><span>Sound Alike</span><h4>Unravel</h4></div>
                     </div>
                     <div class="sub-mini-slice sfx-click" onclick="openProject('Maybe I\'m Wrong', this)">
                         <img src="img/miw1.png" class="sub-mini-bg">
-                        <div class="sub-mini-spine"><h5>Prototype</h5></div>
-                        <div class="sub-mini-content"><h4>Maybe I'm Wrong</h4></div>
+                        <div class="sub-mini-spine"><h5>Maybe I'm Wrong</h5></div>
+                        <div class="sub-mini-content"><span>Prototype</span><h4>Maybe I'm Wrong</h4></div>
                     </div>
                 </div>
             </div>
@@ -394,10 +471,10 @@
                     <div class="about-content-area">
                         <div class="short-intro" id="brief-box">
                             <div class="title-mask">
-                                <h3 class="contact-phrase anim-title" style="font-size: 4rem; text-transform: uppercase; margin-bottom: 30px; letter-spacing: -2px;">My Story.</h3>
+                                <h3 class="contact-phrase anim-title" style="margin-bottom: 30px;">My<br class="mobile-br"> Story.</h3>
                             </div>
                             <p class="reveal-scroll" style="font-size: 1.4rem; color: var(--gray); line-height: 1.5;">My journey began in music, where I developed the rigor and discipline that define my work ethic today.</p>
-                            <button class="btn-main reveal-scroll sfx-click expand-trig" onclick="openAbout()">Read Full Archive</button>
+                            <button class="btn-main reveal-scroll sfx-click expand-trig" onclick="openAbout()">More</button>
                         </div>
                     </div>
                 </div>
@@ -406,8 +483,8 @@
 
         <section class="contact-section framed-section" id="contact">
             <div class="container">
-                <div class="title-mask" style="margin-bottom: 50px;">
-                    <h2 class="contact-phrase anim-title" style="white-space: nowrap;">Get in touch.</h2>
+                <div class="title-mask">
+                    <h2 class="contact-phrase anim-title">Get in<br class="mobile-br"> touch.</h2>
                 </div>
                 <div class="reveal-scroll">
                     <div class="email-big sfx-click" onclick="copyEmail()">rodrigo.albusantos19@gmail.com</div>
@@ -786,13 +863,19 @@
             // 1. O fundo preto aparece para isolar tudo
             gsap.to(overlayBg, { opacity: 1, duration: 0.5, ease: "power2.out" });
 
+            // Verificar se estamos no mobile para ajustar a largura final
+            const finalLeft = window.innerWidth <= 768 ? "0vw" : "2vw";
+            const finalWidth = window.innerWidth <= 768 ? "100vw" : "96vw";
+            const finalBorderRadius = window.innerWidth <= 768 ? "0px" : "24px";
+            const finalTop = window.innerWidth <= 768 ? 0 : 20;
+
             // 2. A imagem voa e ganha as tuas margens e cantos redondos no topo do ecrã
             gsap.to(inner, {
-                top: 20,
-                left: "2vw",
-                width: "96vw",
-                height: window.innerHeight - 40,
-                borderRadius: '24px',
+                top: finalTop,
+                left: finalLeft,
+                width: finalWidth,
+                height: window.innerHeight - (window.innerWidth <= 768 ? 0 : 40),
+                borderRadius: finalBorderRadius,
                 duration: 0.8,
                 ease: "power3.inOut",
                 onComplete: () => {
@@ -812,8 +895,9 @@
                 }
             });
 
-            // A imagem lá dentro cresce para 60vh
-            gsap.to(heroWrap, { height: '60vh', duration: 0.8, ease: "power3.inOut" });
+            // A imagem lá dentro cresce para 60vh (ou um pouco menos no mobile para veres o titulo bem)
+            const finalHeroHeight = window.innerWidth <= 768 ? '50vh' : '60vh';
+            gsap.to(heroWrap, { height: finalHeroHeight, duration: 0.8, ease: "power3.inOut" });
         }
 
         function openProject(name, el) { 
